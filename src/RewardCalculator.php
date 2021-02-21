@@ -30,13 +30,9 @@ class RewardCalculator
         $this->currentReward = $initialReward;
     }
 
-    public function addRevenue(float $revenue)
+    public function calculateReward(float $revenue): float
     {
         $this->totalRevenue += $revenue;
-    }
-
-    public function calculateReward(): float
-    {
         $totalReward = $this->getTotalReward();
         $reward = $totalReward - $this->currentReward;
         $this->currentReward = $totalReward;
@@ -55,13 +51,5 @@ class RewardCalculator
     public function getTotalReward(): float
     {
         return $this->rewardCalculationRulesSet->getReward($this->totalRevenue);
-    }
-
-    /**
-     * @return float
-     */
-    public function getCurrentReward(): float
-    {
-        return $this->currentReward;
     }
 }

@@ -21,12 +21,12 @@ class RewardCalculatorTest extends TestCase
         $this->rewardCalculator = new RewardCalculator($rewardCalculationRulesSet);
     }
 
-    public function testAddRevenue()
+    public function testTotalRevenue()
     {
-        $this->rewardCalculator->addRevenue(1000);
+        $this->rewardCalculator->calculateReward(1000);
         $this->assertEquals(1000.0, $this->rewardCalculator->getTotalRevenue());
 
-        $this->rewardCalculator->addRevenue(1000);
+        $this->rewardCalculator->calculateReward(1000);
         $this->assertEquals(2000.0, $this->rewardCalculator->getTotalRevenue());
     }
 }

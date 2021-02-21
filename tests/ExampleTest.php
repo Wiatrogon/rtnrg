@@ -30,8 +30,10 @@ class ExampleTest extends TestCase
     public function testExample(array $dataSet)
     {
         foreach ($dataSet as [$revenue, $expectedReward]) {
-            $this->rewardCalculator->addRevenue($revenue);
-            $this->assertEquals($expectedReward, $this->rewardCalculator->calculateReward());
+            $this->assertEquals(
+                $expectedReward,
+                $this->rewardCalculator->calculateReward($revenue)
+            );
         }
     }
 
