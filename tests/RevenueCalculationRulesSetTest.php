@@ -4,36 +4,36 @@ namespace Tests;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use RTNRG\RevenueCalculationRule;
-use RTNRG\RevenueCalculationRulesSet;
+use RTNRG\RewardCalculationRule;
+use RTNRG\RewardCalculationRulesSet;
 
 class RevenueCalculationRulesSetTest extends TestCase
 {
     /**
-     * @var RevenueCalculationRulesSet
+     * @var RewardCalculationRulesSet
      */
     private $rulesSet;
 
     public function setUp(): void
     {
-        $this->rulesSet = new RevenueCalculationRulesSet();
+        $this->rulesSet = new RewardCalculationRulesSet();
     }
 
     /**
-     * @dataProvider getRevenueDataProvider
+     * @dataProvider getRewardDataProvider
      */
-    public function testGetRevenue(
-        float $expectedRevenue,
-        RevenueCalculationRule ...$rules
+    public function testGetReward(
+        float $expectedReward,
+        RewardCalculationRule ...$rules
     ) {
         foreach ($rules as $rule) {
             $this->rulesSet->addRule($rule);
         }
 
-        $this->assertEquals($expectedRevenue, $this->rulesSet->getRevenue(10000));
+        $this->assertEquals($expectedReward, $this->rulesSet->getReward(10000));
     }
 
-    public function getRevenueDataProvider(): Generator
+    public function getRewardDataProvider(): Generator
     {
         yield [
             0,
@@ -64,11 +64,11 @@ class RevenueCalculationRulesSetTest extends TestCase
         ];
     }
 
-    protected function getMockedRule(bool $isApplicable, float $revenue): RevenueCalculationRule
+    protected function getMockedRule(bool $isApplicable, float $reward): RewardCalculationRule
     {
-        $rule = $this->createMock(RevenueCalculationRule::class);
+        $rule = $this->createMock(RewardCalculationRule::class);
         $rule->method('isApplicable')->willReturn($isApplicable);
-        $rule->method('getRevenue')->willReturn($revenue);
+        $rule->method('getReward')->willReturn($reward);
 
         return $rule;
     }

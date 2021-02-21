@@ -4,7 +4,7 @@ namespace Tests;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
-use RTNRG\RevenueCalculationRule;
+use RTNRG\RewardCalculationRule;
 
 class RevenueCalculationRuleTest extends TestCase
 {
@@ -16,7 +16,7 @@ class RevenueCalculationRuleTest extends TestCase
         float $upperThreshold,
         float $amount
     ) {
-        $rule = new RevenueCalculationRule($lowerThreshold, $upperThreshold, 100);
+        $rule = new RewardCalculationRule($lowerThreshold, $upperThreshold, 100);
         $this->assertTrue($rule->isApplicable($amount));
     }
 
@@ -42,7 +42,7 @@ class RevenueCalculationRuleTest extends TestCase
         float $upperThreshold,
         float $amount
     ) {
-        $rule = new RevenueCalculationRule($lowerThreshold, $upperThreshold, 100);
+        $rule = new RewardCalculationRule($lowerThreshold, $upperThreshold, 100);
         $this->assertFalse($rule->isApplicable($amount));
     }
 
@@ -53,74 +53,74 @@ class RevenueCalculationRuleTest extends TestCase
     }
 
     /**
-     * @dataProvider noRevenueDataProvider
+     * @dataProvider noRewardDataProvider
      */
-    public function testNoRevenue(
-        RevenueCalculationRule $rule,
+    public function testNoReward(
+        RewardCalculationRule $rule,
         float $amount
     ) {
-        $this->assertEquals(0, $rule->getRevenue($amount));
+        $this->assertEquals(0, $rule->getReward($amount));
     }
 
-    public function noRevenueDataProvider(): Generator
+    public function noRewardDataProvider(): Generator
     {
         yield [
-            new RevenueCalculationRule(0, 100, 100),
+            new RewardCalculationRule(0, 100, 100),
             0,
         ];
 
         yield [
-            new RevenueCalculationRule(100, 1000, 20),
+            new RewardCalculationRule(100, 1000, 20),
             100,
             0,
         ];
 
         yield [
-            new RevenueCalculationRule(100, 1000, 20),
+            new RewardCalculationRule(100, 1000, 20),
             -100,
             0,
         ];
     }
 
     /**
-     * @dataProvider getRevenueDataProvider
+     * @dataProvider getRewardDataProvider
      */
-    public function testGetRevenue(
-        RevenueCalculationRule $rule,
-        float $amount,
-        float $expectedRevenue
+    public function testGetReward(
+        RewardCalculationRule $rule,
+        float $revenue,
+        float $expectedReward
     ) {
-        $this->assertEquals($expectedRevenue, $rule->getRevenue($amount));
+        $this->assertEquals($expectedReward, $rule->getReward($revenue));
     }
 
-    public function getRevenueDataProvider(): Generator
+    public function getRewardDataProvider(): Generator
     {
         yield [
-            new RevenueCalculationRule(0, 10000, 10),
+            new RewardCalculationRule(0, 10000, 10),
             9000,
             900.0
         ];
 
         yield [
-            new RevenueCalculationRule(0, 10000, 10),
+            new RewardCalculationRule(0, 10000, 10),
             11000,
             1000.0
         ];
 
         yield [
-            new RevenueCalculationRule(10000, 100000, 20),
+            new RewardCalculationRule(10000, 100000, 20),
             11000,
             200.0
         ];
 
         yield [
-            new RevenueCalculationRule(0, 10000, 10),
+            new RewardCalculationRule(0, 10000, 10),
             -120000,
             -1000
         ];
 
         yield [
-            new RevenueCalculationRule(10000, 100000, 20),
+            new RewardCalculationRule(10000, 100000, 20),
             -120000,
             -20000
         ];
