@@ -39,6 +39,20 @@ class RevenueCalculationRule
 
     public function getRevenue(float $amount): float
     {
-        return 0;
+        return $this->isApplicable($amount)
+            ? $this->calculateRevenue($amount)
+            : 0;
+    }
+
+    protected function calculateRevenue(float $amount): float
+    {
+        return $this->getRevenueBase($amount) * $this->percent / 100;
+    }
+
+    protected function getRevenueBase(float $amount): float
+    {
+        return $amount > 0
+            ? min($amount - $this->lowerThreshold, $this->upperThreshold)
+            : max($amount + $this->lowerThreshold, -$this->upperThreshold);
     }
 }

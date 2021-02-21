@@ -81,4 +81,48 @@ class RevenueCalculationRuleTest extends TestCase
             0,
         ];
     }
+
+    /**
+     * @dataProvider getRevenueDataProvider
+     */
+    public function testGetRevenue(
+        RevenueCalculationRule $rule,
+        float $amount,
+        float $expectedRevenue
+    ) {
+        $this->assertEquals($expectedRevenue, $rule->getRevenue($amount));
+    }
+
+    public function getRevenueDataProvider(): Generator
+    {
+        yield [
+            new RevenueCalculationRule(0, 10000, 10),
+            9000,
+            900.0
+        ];
+
+        yield [
+            new RevenueCalculationRule(0, 10000, 10),
+            11000,
+            1000.0
+        ];
+
+        yield [
+            new RevenueCalculationRule(10000, 100000, 20),
+            11000,
+            200.0
+        ];
+
+        yield [
+            new RevenueCalculationRule(0, 10000, 10),
+            -120000,
+            -1000
+        ];
+
+        yield [
+            new RevenueCalculationRule(10000, 100000, 20),
+            -120000,
+            -20000
+        ];
+    }
 }
