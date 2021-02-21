@@ -7,7 +7,7 @@ use PHPUnit\Framework\TestCase;
 use RTNRG\RewardCalculationRule;
 use RTNRG\RewardCalculationRulesSet;
 
-class RevenueCalculationRulesSetTest extends TestCase
+class RewardCalculationRulesSetTest extends TestCase
 {
     /**
      * @var RewardCalculationRulesSet

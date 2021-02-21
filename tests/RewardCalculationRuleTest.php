@@ -6,7 +6,7 @@ use Generator;
 use PHPUnit\Framework\TestCase;
 use RTNRG\RewardCalculationRule;
 
-class RevenueCalculationRuleTest extends TestCase
+class RewardCalculationRuleTest extends TestCase
 {
     /**
      * @dataProvider ruleIsApplicableDataProvider
