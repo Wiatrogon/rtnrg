@@ -4,11 +4,12 @@ namespace Tests;
 
 use Generator;
 use PHPUnit\Framework\TestCase;
+use RTNRG\ExampleCalculator;
 use RTNRG\RewardCalculationRule;
 use RTNRG\RewardCalculationRulesSet;
 use RTNRG\RewardCalculator;
 
-class ExampleTest extends TestCase
+class ExampleCalculatorTest extends TestCase
 {
     /**
      * @var RewardCalculator
@@ -17,11 +18,7 @@ class ExampleTest extends TestCase
 
     public function setUp(): void
     {
-        $set = new RewardCalculationRulesSet();
-        $set->addRule(new RewardCalculationRule(0, 10000, 10));
-        $set->addRule(new RewardCalculationRule(10000, 100000, 20));
-
-        $this->rewardCalculator = new RewardCalculator($set);
+        $this->rewardCalculator = new ExampleCalculator();
     }
 
     /**
