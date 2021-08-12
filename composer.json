@@ -1,5 +1,7 @@
 {
     "name": "wiatrogon/rtnrg",
+    "license": "None",
+    "description": "technical interview assignment",
     "autoload": {
         "psr-4": {
             "RTNRG\\": "src/"
