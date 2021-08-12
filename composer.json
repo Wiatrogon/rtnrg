@@ -1,4 +1,5 @@
 {
+    "name": "wiatrogon/rtnrg",
     "autoload": {
         "psr-4": {
             "RTNRG\\": "src/"
